@@ -1,3 +1,4 @@
+package javase;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,32 +19,33 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 
 
 public  class MyFrame extends JFrame implements ActionListener
 {
-	public Cart c1 = new Cart();
-    public JPanel productPanel;
+	//global variables for the main components
+	public Cart c1 = new Cart();    
+    public JPanel productPanel;		
     public JLabel totalPriceLabel;
     public JPanel totalPricePanel;
     public JTextField taxRate;
     
 	MyFrame()
 	{
+		ImageIcon image = new ImageIcon("shopping-cart.png");  //object "image" which stores the Icon of the frame
 		
 		
 		               
-		JButton addButton = new JButton();
+		JButton addButton = new JButton("+");     
 		addButton.setBounds(0,0,100,100);
-		addButton.setText("+");
 		addButton.setFocusable(false);
 		addButton.addActionListener(e -> showAddProductDialog());
 		
 		
-		JButton removeButton = new JButton();
+		JButton removeButton = new JButton("-");
 		removeButton.setBounds(0,0,100,100);
-		removeButton.setText("-");
 		removeButton.addActionListener(e -> showRemoveProductDialog());
 		removeButton.setFocusable(false);
 
@@ -51,7 +54,7 @@ public  class MyFrame extends JFrame implements ActionListener
 		
 		taxRate = new JTextField("0",2);
 		taxRate.setFont(new Font("MV Boli" , Font.PLAIN,20));
-		taxRate.addActionListener(e -> updateTotalPrice());
+		taxRate.addActionListener(e -> {updateTotalPrice();updateProductPane();});
 		
 		totalPriceLabel = new JLabel("%  AED 0.0");
 		totalPriceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
@@ -79,6 +82,8 @@ public  class MyFrame extends JFrame implements ActionListener
         
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Amazon Ripoff");
+		this.setIconImage(image.getImage());
 		this.setLayout(new BorderLayout());
 		this.setSize(1000,600);
 		this.add(totalPricePanel,BorderLayout.SOUTH);
@@ -122,7 +127,7 @@ public  class MyFrame extends JFrame implements ActionListener
 		panel.add(nameField);
 		panel.add(Box.createHorizontalStrut(15));
 		
-		int result = JOptionPane.showConfirmDialog(this,panel,"Add New Product",JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(this,panel,"Remove Product",JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 		
 		if (result == JOptionPane.OK_OPTION)
 		{
@@ -186,13 +191,14 @@ public  class MyFrame extends JFrame implements ActionListener
 	public JPanel productLabelCreation(RegularItem item)
 	{
 		JPanel panel = new JPanel();
+		JPanel namePanel = new JPanel();
+		JPanel pricePanel = new JPanel();
+		JPanel rmPanel = new JPanel();
+		
 		JLabel nameLabel = new JLabel(item.getItemName());
-		JLabel priceLabel = new JLabel("" +item.getItemPrice());
 		nameLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
+		JLabel priceLabel = new JLabel("" + TaxCalculator.calculatePriceWithTax("",item.getItemPrice(),Double.parseDouble(taxRate.getText())));
 		priceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
-		nameLabel.setVerticalAlignment(JLabel.TOP);
-		nameLabel.setHorizontalAlignment(JLabel.LEFT);
-		priceLabel.setVerticalAlignment(JLabel.TOP);
 		
 		JButton removeButton = new JButton(" - ");
 		removeButton.setFocusable(false);
@@ -200,15 +206,18 @@ public  class MyFrame extends JFrame implements ActionListener
 		removeButton.addActionListener(e -> rmProd(item.getItemName()));
 		removeButton.setHorizontalAlignment(JLabel.RIGHT);
 		
-		panel.setLayout(new FlowLayout(FlowLayout.LEADING));
-		panel.setPreferredSize(new Dimension(100,100));
-		panel.add(nameLabel);
-		panel.add(new JLabel("                                                                                                    "));
-		panel.add(priceLabel);
-		panel.add(new JLabel("                                                                                                    "));
-		panel.add(removeButton);
+		panel.setLayout(new BorderLayout(30,0));
+		panel.add(namePanel,BorderLayout.WEST);
+		panel.add(pricePanel,BorderLayout.CENTER);
+		panel.add(rmPanel,BorderLayout.EAST);
+		namePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pricePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		rmPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		namePanel.add(nameLabel);
+		pricePanel.add(priceLabel);
+		rmPanel.add(removeButton);
 		return panel;
-	
+		
 	}
 
 
@@ -222,7 +231,3 @@ public  class MyFrame extends JFrame implements ActionListener
 	
 	
 }
-	
-	
-
-
