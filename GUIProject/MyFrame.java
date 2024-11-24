@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
@@ -19,9 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-
-
 
 public  class MyFrame extends JFrame implements ActionListener
 {
@@ -82,7 +77,7 @@ public  class MyFrame extends JFrame implements ActionListener
         
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Amazon Ripoff");
+		this.setTitle("The Cart");
 		this.setIconImage(image.getImage());
 		this.setLayout(new BorderLayout());
 		this.setSize(1000,600);
@@ -185,7 +180,7 @@ public  class MyFrame extends JFrame implements ActionListener
 	
 	public void updateTotalPrice()
 	{
-		totalPriceLabel.setText("%  AED " + TaxCalculator.calculatePriceWithTax(""	,c1.calculateTotalPriceWithOutTax(),Double.parseDouble(taxRate.getText())));
+		totalPriceLabel.setText("%  AED " + TaxCalculator.calculatePriceWithTax(c1.calculateTotalPriceWithOutTax(),Double.parseDouble(taxRate.getText())));
 	}
 	
 	public JPanel productLabelCreation(RegularItem item)
@@ -197,7 +192,7 @@ public  class MyFrame extends JFrame implements ActionListener
 		
 		JLabel nameLabel = new JLabel(item.getItemName());
 		nameLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
-		JLabel priceLabel = new JLabel("" + TaxCalculator.calculatePriceWithTax("",item.getItemPrice(),Double.parseDouble(taxRate.getText())));
+		JLabel priceLabel = new JLabel("" + TaxCalculator.calculatePriceWithTax(item.getItemPrice(),Double.parseDouble(taxRate.getText())));
 		priceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
 		
 		JButton removeButton = new JButton(" - ");
@@ -207,9 +202,9 @@ public  class MyFrame extends JFrame implements ActionListener
 		removeButton.setHorizontalAlignment(JLabel.RIGHT);
 		
 		panel.setLayout(new BorderLayout(30,0));
-		panel.add(namePanel,BorderLayout.WEST);
-		panel.add(pricePanel,BorderLayout.CENTER);
-		panel.add(rmPanel,BorderLayout.EAST);
+		panel.add(namePanel,BorderLayout.CENTER);
+		panel.add(pricePanel,BorderLayout.EAST);
+		panel.add(rmPanel,BorderLayout.WEST);
 		namePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pricePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		rmPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -231,3 +226,7 @@ public  class MyFrame extends JFrame implements ActionListener
 	
 	
 }
+	
+	
+
+
