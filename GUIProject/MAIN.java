@@ -35,7 +35,7 @@ public class Main {
 // Don't mind the above code it is for later use to build the GUI
 import java.util.Scanner;
 
-
+can you see anything now?
 
 
 public class MAIN{
