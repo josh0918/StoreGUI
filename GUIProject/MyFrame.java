@@ -199,7 +199,7 @@ public  class MyFrame extends JFrame implements ActionListener
 		
 		
 		JSpinner quantityBox = new JSpinner(new SpinnerNumberModel(1,1,15,1));
-		quantityBox.setFont(new Font("MV Boli" , Font.PLAIN,15));
+		quantityBox.setFont(new Font("MV Boli" , Font.BOLD,15));
 		quantityBox.setValue(item.getQuantity());
 		quantityBox.addChangeListener(e -> {item.setQuantity((int)quantityBox.getValue());updateProductPane();updateTotalPrice();});
 		
