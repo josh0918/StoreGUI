@@ -130,16 +130,11 @@ class Cart  {
    
 }
 
-
+// Tax Calculator Class to calculate total price wiht and with out (tax rate = 0 ) tax
 class TaxCalculator {
-    Scanner TaxCalculatorInput = new Scanner(System.in);
     double taxRate, totalPrice;
 
-    // Default constructor to read tax rate
-    TaxCalculator() {
-        taxRate = TaxCalculatorInput.nextDouble();
-    }
-
+    // Constructor
     TaxCalculator(double taxRate, String name, double price) {
         this.taxRate = taxRate;
     }
