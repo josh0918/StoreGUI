@@ -184,44 +184,56 @@ public  class MyFrame extends JFrame implements ActionListener
 	{
 		totalPriceLabel.setText("%  AED " + TaxCalculator.calculatePriceWithTax(c1.calculateTotalPriceWithOutTax(),Double.parseDouble(taxRate.getText())));
 	}
-	
+
+
+	// Iterates in a for loop to pass each item from our array
+	// JPanel retruning type class to create panel containg products name and price 
 	public JPanel productLabelCreation(RegularItem item)
-	{
+	{	
+		// GUI Panel instance declaration
 		JPanel panel = new JPanel();
 		JPanel namePanel = new JPanel();
 		JPanel pricePanel = new JPanel();
 		JPanel rmPanel = new JPanel();
-		
+
+		//GUI Lable: Item name and price labels declaration and modification
 		JLabel nameLabel = new JLabel(item.getItemName());
 		nameLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
 		JLabel priceLabel = new JLabel("" + TaxCalculator.calculatePriceWithTax(item.getItemPrice(),Double.parseDouble(taxRate.getText())));
 		priceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
 		
-		
+		// GUI Spinner to increase the quantity of items in the cart
 		JSpinner quantityBox = new JSpinner(new SpinnerNumberModel(1,1,15,1));
 		quantityBox.setFont(new Font("MV Boli" , Font.BOLD,15));
 		quantityBox.setValue(item.getQuantity());
 		quantityBox.addChangeListener(e -> {item.setQuantity((int)quantityBox.getValue());updateProductPane();updateTotalPrice();});
 		
-		
+		// GUI Button: Remove Button to remove the item from our panel
 		JButton removeButton = new JButton(" - ");
 		removeButton.setFocusable(false);
 		removeButton.setBounds(200,200,15,15);
 		removeButton.addActionListener(e -> rmProd(item.getItemName()));
-		removeButton.setHorizontalAlignment(JLabel.RIGHT);
-		
+	
+		// Sets the layout and dimension of our general panel
 		panel.setLayout(new BorderLayout(30,0));
+
+		// Adds the items name, price, and remove button panels to general panel
 		panel.add(namePanel,BorderLayout.CENTER);
 		panel.add(pricePanel,BorderLayout.EAST);
 		panel.add(rmPanel,BorderLayout.WEST);
+
+		// Sets the layout of item name, price, and remove button
 		namePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pricePanel.setLayout(new FlowLayout(FlowLayout.LEADING,20,0));
 		rmPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		// Each panel adds its own content
 		namePanel.add(nameLabel);
 		pricePanel.add(quantityBox);
 		pricePanel.add(priceLabel);
 		rmPanel.add(removeButton);
-		
+
+		// This panel will be returned back to the caller JPanel object
 		return panel;
 		
 	}
