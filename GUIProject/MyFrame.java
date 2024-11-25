@@ -79,7 +79,7 @@ public  class MyFrame extends JFrame implements ActionListener
         
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("The Cart");
+		this.setTitle("Simplified Shopping Cart System ");
 		this.setIconImage(image.getImage());
 		this.setLayout(new BorderLayout());
 		this.setSize(1000,600);
