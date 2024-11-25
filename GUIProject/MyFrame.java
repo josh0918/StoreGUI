@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public  class MyFrame extends JFrame implements ActionListener
 {
@@ -195,6 +197,13 @@ public  class MyFrame extends JFrame implements ActionListener
 		JLabel priceLabel = new JLabel("" + TaxCalculator.calculatePriceWithTax(item.getItemPrice(),Double.parseDouble(taxRate.getText())));
 		priceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
 		
+		
+		JSpinner quantityBox = new JSpinner(new SpinnerNumberModel(1,1,15,1));
+		quantityBox.setFont(new Font("MV Boli" , Font.PLAIN,15));
+		quantityBox.setValue(item.getQuantity());
+		quantityBox.addChangeListener(e -> {item.setQuantity((int)quantityBox.getValue());updateProductPane();updateTotalPrice();});
+		
+		
 		JButton removeButton = new JButton(" - ");
 		removeButton.setFocusable(false);
 		removeButton.setBounds(200,200,15,15);
@@ -206,11 +215,13 @@ public  class MyFrame extends JFrame implements ActionListener
 		panel.add(pricePanel,BorderLayout.EAST);
 		panel.add(rmPanel,BorderLayout.WEST);
 		namePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		pricePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pricePanel.setLayout(new FlowLayout(FlowLayout.LEADING,20,0));
 		rmPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		namePanel.add(nameLabel);
+		pricePanel.add(quantityBox);
 		pricePanel.add(priceLabel);
 		rmPanel.add(removeButton);
+		
 		return panel;
 		
 	}
