@@ -17,10 +17,12 @@ public class MAIN{
 abstract class Item {
     private String itemName;
     private double itemPrice;
+    private int quantity;
 
     public Item(String name, double price) {
         this.itemName = name;
         this.itemPrice = price;
+        this.quantity = 1;
     }
 
     public String getItemName() {
@@ -32,11 +34,19 @@ abstract class Item {
     }
 
     public double getItemPrice() {
-        return itemPrice;
+        return itemPrice*quantity;
     }
 
     public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public int getQuantity (){
+    	return quantity;
+    }
+   
+    public void setQuantity (int quantity){
+    	this.quantity = quantity;
     }
 
     // Abstract method for calculating price with tax
@@ -102,7 +112,7 @@ class Cart  {
         for (int i = 0; i < arrLen; i++)
         {
 
-            price += itemArr[i].getItemPrice();
+            price += (itemArr[i].getQuantity() *itemArr[i].getItemPrice());
 
         }
 
