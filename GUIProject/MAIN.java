@@ -69,42 +69,41 @@ class RegularItem extends Item {
 
 class Cart  {
 
-    RegularItem[] itemArr = new RegularItem[50];
-    public static int arrLen = 0;
+    RegularItem[] itemArr = new RegularItem[50]; // creates object itemArr with dataType RegularItem
+    public static int arrLen = 0; // counter for the number of items in itemArr
 
-    
+    // adds new items
     public void addItem(String name, double price)
     {
-    	RegularItem i1 = new RegularItem(name,price);
-    	itemArr[arrLen] = i1;
-    	arrLen++;
+    	RegularItem i1 = new RegularItem(name,price); // create new instance of Regular item
+    	itemArr[arrLen] = i1; // adds new item into item array
+    	arrLen++; 
     }
     
-    public int rmItem(String name)
+    // removes items
+    public void rmItem(String name)
     {
-    	boolean found = false;
-    	if (arrLen > 0)
+    	boolean found = false; // boolean used to indicate the status of the search
+    	if (arrLen > 0)  // if array is no empty
     	{
     		for (int i = 0; i < arrLen; i++)
     		{
     			if (itemArr[i].getItemName().equalsIgnoreCase(name))
     			{
-    				itemArr[i] = null;
+    				itemArr[i] = null;  // removes item from array
     				found = true;
     				arrLen--;
     				
     			}
-    			if (i != 50 && found == true)
+    			if (i != 50 && found == true) // if loop is not on the final item in the array and is item was found
     			{
-    				itemArr[i] = itemArr[i+1];
+    				itemArr[i] = itemArr[i+1]; // shift items one step back. Used to rearrange the array.
     			}
     		}
-    		
-    		return 0;
     	}
-		return 0;
     }
 
+    // calculates the total price of all the items with tax
     public double calculateTotalPriceWithTax(double taxRate) 
     {
         double price = 0;
@@ -112,23 +111,25 @@ class Cart  {
         for (int i = 0; i < arrLen; i++)
         {
 
-            price += (itemArr[i].getQuantity() *itemArr[i].getItemPrice());
+            price += (itemArr[i].getQuantity() *itemArr[i].getItemPrice()); // product of itemprice and quantity of item
 
         }
 
-        return TaxCalculator.calculatePriceWithTax(price,taxRate);
+        return TaxCalculator.calculatePriceWithTax(price,taxRate); // calls TaxCalulator class to find the price with tax, and then return that value
         
     }
-
+    
+    // calculates the total price wihtout tax
     public double calculateTotalPriceWithOutTax()
     {
 
-        return calculateTotalPriceWithTax(0);
+        return calculateTotalPriceWithTax(0); // call the calculateTotalPriceWithTax method in the cart class.
 
     }
 
    
 }
+
 
 // Tax Calculator Class to calculate total price wiht and with out (tax rate = 0 ) tax
 class TaxCalculator {
