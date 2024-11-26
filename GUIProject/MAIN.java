@@ -111,7 +111,7 @@ class Cart  {
         for (int i = 0; i < arrLen; i++)
         {
 
-            price += (itemArr[i].getQuantity() *itemArr[i].getItemPrice()); // product of itemprice and quantity of item
+            price += itemArr[i].getItemPrice(); // product of itemprice and quantity of item
 
         }
 
