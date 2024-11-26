@@ -136,8 +136,8 @@ class TaxCalculator {
     double taxRate, totalPrice;
 
     // Constructor
-    TaxCalculator(double taxRate, String name, double price) {
-        this.taxRate = taxRate;
+    TaxCalculator() {
+
     }
 
     public static double calculatePriceWithTax(double totalPrice, double taxRate) {
