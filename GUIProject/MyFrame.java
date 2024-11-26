@@ -23,73 +23,79 @@ import javax.swing.SpinnerNumberModel;
 public  class MyFrame extends JFrame implements ActionListener
 {
 	//global variables for the main components
-	public Cart c1 = new Cart();    
-    public JPanel productPanel;		
-    public JLabel totalPriceLabel;
-    public JPanel totalPricePanel;
-    public JTextField taxRate;
+	private Cart c1 = new Cart();    
+   	private JPanel productPanel;		
+   	private JLabel totalPriceLabel;
+    	private JPanel totalPricePanel;
+    	private JTextField taxRate;
     
 	MyFrame()
 	{
 		ImageIcon image = new ImageIcon("shopping-cart.png");  //object "image" which stores the Icon of the frame
 		
-		
-		               
+		//creating button to add items
 		JButton addButton = new JButton("+");     
 		addButton.setBounds(0,0,100,100);
 		addButton.setFocusable(false);
 		addButton.addActionListener(e -> showAddProductDialog());
 		
-		
+		//creates button to remove items
 		JButton removeButton = new JButton("-");
 		removeButton.setBounds(0,0,100,100);
 		removeButton.addActionListener(e -> showRemoveProductDialog());
 		removeButton.setFocusable(false);
 
+		//Creates the text for the price
 		JLabel prePriceLabel = new JLabel("Total Price at ");
-		prePriceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
+		prePriceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20)); // sets Font for text
 		
+		//creates textfield to enter taxrate
 		taxRate = new JTextField("0",2);
 		taxRate.setFont(new Font("MV Boli" , Font.PLAIN,20));
 		taxRate.addActionListener(e -> {updateTotalPrice();updateProductPane();});
 		
+		//create JLabel with contains the total price of all items
 		totalPriceLabel = new JLabel("%  AED 0.0");
 		totalPriceLabel.setFont(new Font("MV Boli" , Font.PLAIN,20));
 		
-		
+		//creates JPanel which holds the details of all the items in the cart
 		productPanel = new JPanel();
-		productPanel.setLayout(new BoxLayout(productPanel, BoxLayout.Y_AXIS));
+		productPanel.setLayout(new BoxLayout(productPanel, BoxLayout.Y_AXIS)); //BoxLayout.Y_AXIS arranges all new components vertically
 		
+        	//gives productPanel the ability to scroll when components inside productPanel exceed set Bounds
+        	JScrollPane scrollPane = new JScrollPane(productPanel);
+        	scrollPane.setBackground(Color.GRAY);
         
-        JScrollPane scrollPane = new JScrollPane(productPanel);
-        scrollPane.setBackground(Color.GRAY);
+        	//creates JPanel to hold the price of all items in cart
+        	totalPricePanel = new JPanel();
+        	totalPricePanel.setPreferredSize(new Dimension(0,70)); // sets width of the panel to height 70
         
-        totalPricePanel = new JPanel();
-        totalPricePanel.setPreferredSize(new Dimension(0,70));
-        totalPricePanel.add(prePriceLabel);
-        totalPricePanel.add(taxRate);
-        totalPricePanel.add(totalPriceLabel);
-        totalPricePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        	totalPricePanel.setLayout(new FlowLayout(FlowLayout.LEADING)); //FlowLayout.LEADING set alignment of the components the the left side
+        	totalPricePanel.add(prePriceLabel);
+        	totalPricePanel.add(taxRate);
+        	totalPricePanel.add(totalPriceLabel);
+        	
+        	// create JPanel that holds the add and remove button
+        	JPanel optionsPane = new JPanel();
+        	optionsPane.setLayout(new FlowLayout(FlowLayout.CENTER,200,20)); //FlowLayout.CENTER set alignment of the components the the Center
+       	 	optionsPane.setPreferredSize(new Dimension(70,0));
+        	optionsPane.add(addButton);
+        	optionsPane.add(removeButton);
         
-        JPanel optionsPane = new JPanel();
-        optionsPane.setLayout(new FlowLayout(FlowLayout.CENTER,200,20));
-        optionsPane.setPreferredSize(new Dimension(70,0));
-        optionsPane.add(addButton);
-        optionsPane.add(removeButton);
-        
-
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Simplified Shopping Cart System ");
-		this.setIconImage(image.getImage());
+        	//creates the JFrame that will house all components
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // sets what happens when we exit button is pressed
+		this.setTitle("Simplified Shopping Cart System"); // title
+		this.setIconImage(image.getImage()); 
 		this.setLayout(new BorderLayout());
 		this.setSize(1000,600);
-		this.add(totalPricePanel,BorderLayout.SOUTH);
-		this.add(optionsPane,BorderLayout.EAST);
-		this.add(scrollPane,BorderLayout.CENTER);
-		this.setVisible(true);
+		this.add(totalPricePanel,BorderLayout.SOUTH); //sets totalPricePanel as a border at the SOUTH of the frame
+		this.add(optionsPane,BorderLayout.EAST);  //sets optionsPane as a border at the EAST of the frame
+		this.add(scrollPane,BorderLayout.CENTER); //sets scrollPane as a border at the CENTER of the frame
+		this.setVisible(true); // makes the JFrame visible
 		
 	}
 	
+
 
 	public void showAddProductDialog()
 	{
