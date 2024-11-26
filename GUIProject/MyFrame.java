@@ -187,10 +187,10 @@ public  class MyFrame extends JFrame implements ActionListener
 	
 	public void updateTotalPrice()
 	{
-		totalPriceLabel.setText("%  AED " + TaxCalculator.calculatePriceWithTax(c1.calculateTotalPriceWithOutTax(),Double.parseDouble(taxRate.getText())));
+		totalPriceLabel.setText("%  AED " + c1.calculateTotalPriceWithTax(Double.parseDouble(taxRate.getText())));
 	}
 
-
+	
 	// Iterates in a for loop to pass each item from our array
 	// JPanel retruning type class to create panel containg products name and price 
 	public JPanel productLabelCreation(RegularItem item)
