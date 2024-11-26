@@ -163,7 +163,6 @@ public  class MyFrame extends JFrame implements ActionListener
 		if (c1.arrLen != 0)
 		{
 			productPanel.removeAll();
-			System.out.println(c1.arrLen);
 			for (int i = 0; i < c1.arrLen;i++)
 			{
 				
