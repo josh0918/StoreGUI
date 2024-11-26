@@ -99,24 +99,23 @@ public  class MyFrame extends JFrame implements ActionListener
 
 	public void showAddProductDialog()
 	{
-		JTextField nameField = new JTextField(10);
-		JTextField priceField = new JTextField(10);
+		JTextField nameField = new JTextField(10); //creates textfield for user to enter name
+		JTextField priceField = new JTextField(10);//creates textfield for user to enter name
 		
 		JPanel panel = new JPanel();
 		panel.add(new JLabel("Item Name: "));
 		panel.add(nameField);
-		panel.add(Box.createHorizontalStrut(15));
 		panel.add(new JLabel("Price:"));
 		panel.add(priceField);
 		
-		int result = JOptionPane.showConfirmDialog(this,panel,"Add New Product",JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(this,panel,"Add New Product",JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE); //formats the panel in the form of a dialog box
 		
-		if (result == JOptionPane.OK_OPTION)
+		if (result == JOptionPane.OK_OPTION) // if okay is pressed.
 		{
-			String itemName = nameField.getText();
-			double itemPrice = Double.parseDouble(priceField.getText());
+			String itemName = nameField.getText(); //stores text in textfield into string variable
+			double itemPrice = Double.parseDouble(priceField.getText());  // convert text in textfield priceField and stores in double variable
 			
-			addProd(itemName,itemPrice);
+			addProd(itemName,itemPrice); // call addProd method to add new product
 		}
 	}
 	
