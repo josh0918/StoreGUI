@@ -222,6 +222,7 @@ public  class MyFrame extends JFrame implements ActionListener
 	
 		// Sets the layout and dimension of our general panel
 		panel.setLayout(new BorderLayout(30,0));
+		panel.setPreferredSize(new Dimension(0, 100));
 
 		// Adds the items name, price, and remove button panels to general panel
 		panel.add(namePanel,BorderLayout.CENTER);
