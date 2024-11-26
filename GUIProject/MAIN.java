@@ -136,9 +136,8 @@ class TaxCalculator {
     double taxRate, totalPrice;
 
     // Constructor
-    TaxCalculator(double totalPrice, double taxRate) {
+    TaxCalculator(double taxRate) {
         this.taxRate = taxRate;
-        this.totalPrice = totalPrice;
     }
 
 
