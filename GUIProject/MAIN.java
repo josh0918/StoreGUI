@@ -136,9 +136,11 @@ class TaxCalculator {
     double taxRate, totalPrice;
 
     // Constructor
-    TaxCalculator() {
-
+    TaxCalculator(double totalPrice, double taxRate) {
+        this.taxRate = taxRate;
+        this.totalPrice = totalPrice;
     }
+
 
     public static double calculatePriceWithTax(double totalPrice, double taxRate) {
         double priceWithTax = totalPrice + ((taxRate / 100) * totalPrice);
