@@ -1,4 +1,4 @@
-package javase;
+package StoreGUI;
 
 
 public class MAIN{
