@@ -1,4 +1,3 @@
-
 package StoreGUI;
 
 import java.awt.BorderLayout;
